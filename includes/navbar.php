@@ -11,6 +11,7 @@
 
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
+        
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
@@ -61,7 +62,7 @@
 
 <!-- Nav Item - Activities Menu -->
 <li class="nav-item">
-  <a class="nav-link" href="register.php">
+  <a class="nav-link" href="announcement.php">
   <i class="fas fa-bullhorn"></i>
     <span>Announcement</span></a>
 </li>
@@ -85,12 +86,7 @@
       <h6 class="collapse-header">Login Screens:</h6>
       <a class="collapse-item" href="login.php">Login</a>
       <a class="collapse-item" href="register.php">Register</a>
-      <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-      <div class="collapse-divider"></div>
-      <h6 class="collapse-header">Other Pages:</h6>
-      <a class="collapse-item" href="404.html">404 Page</a>
-      <a class="collapse-item" href="blank.html">Blank Page</a>
-    </div>
+     
   </div>
 </li>
 
@@ -120,10 +116,11 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+     <!-- Topbar Search -->
+     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>
@@ -131,9 +128,6 @@
               </div>
             </div>
           </form>
-
-
-          <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -143,22 +137,15 @@
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
+              <form action="" method="GET">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
               </div>
             </li>
 
-       
-
-            <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">

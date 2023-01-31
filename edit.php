@@ -13,6 +13,16 @@ include('security.php');
         </div>
         <div class="card-body">
         <?php
+            if(isset($_SESSION['success']) && $_SESSION['success']!=''){
+                echo '<h2> '.$_SESSION['success'].'</h2>';
+                unset($_SESSION['success']);
+            }
+            else if(isset($_SESSION['status']) && $_SESSION['status']!=''){
+                echo '<h2>'.$_SESSION['status'].'</h2>';
+                unset($_SESSION['status']);
+            }
+        ?>
+        <?php
             $connection = mysqli_connect("localhost","root","","bloodline");
             if(isset($_POST['edit_btn']))
             {
@@ -32,7 +42,7 @@ include('security.php');
                             </div>
                             <div class="form-group">
                             <label for="" class="control-label">Gender</label>
-                            <select name="edit_gender" id="" class="custom-select select2" required>
+                            <select name="edit_cantren" id="" class="custom-select select2" required>
                                 <option value ="<?php echo $row['gender'] ?>"> Select Gender</option>
                                 <option value = "Female"> Female </option>
                                 <option value = "Male"> Male </option>
@@ -54,11 +64,16 @@ include('security.php');
                                     placeholder="Enter Mobile number">
 
                             </div>
-                        
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" name="edit_password" value="<?php echo $row['password'] ?>" class="form-control"
+                                    placeholder="Enter Password">
+
+                            </div>
                             <div class="form-group">
                             <label for="" class="control-label">Blood Group</label>
                             <select name="edit_bloodGroup" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['bloodGroup'] ?>"> Select blood group</option>
+                                <option value =" <?php echo $row['bloodGroup'] ?>"> Select Blood group</option>
                                 <option value = "A+">A+</option>
                                 <option value = "A-">A-</option>
                                 <option value = "B+">B+</option>
@@ -70,17 +85,18 @@ include('security.php');
                             </select>
                              </div>
 
-                        <div class="form-group">
-                        <label for="">Status</label>
-                        <select name="edit_status">
-                            <option value=""> Select Status </option>
-                            <option value="0"> pending </option>
-                            <option value="1"> testing </option>
-                            <option value="2"> storage </option>
-                            <option value="3"> distribution </option>
-                            <option value="4"> transfusion </option>
-                        </select>
-                        </div>
+                             <div class="form-group">
+                            <label for="" class="control-label">Status</label>
+                            <select name="edit_status" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['status'] ?>"> Select status</option>
+                                <option value="0"> pending </option>
+                                <option value="1"> testing </option>
+                                <option value="2"> storage </option>
+                                <option value="3"> distribution </option>
+                                <option value="4"> transfusion </option>
+                                </select>
+                             </div>
+                   
                             <a href="donor.php" class="btn btn-danger"> CANCEL </a>
                             <button type="submit" name="updatebtn" class="btn btn-primary"> UPDATE </button>
                         </form>
