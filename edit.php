@@ -1,7 +1,9 @@
 <?php
+@session_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 include('security.php');
+
 ?>
 
 <div class="container-fluid">
@@ -12,18 +14,12 @@ include('security.php');
             <h6 class="m-0 font-weight-bold text-primary"> EDIT Profile </h6>
         </div>
         <div class="card-body">
-        <?php
-            if(isset($_SESSION['success']) && $_SESSION['success']!=''){
-                echo '<h2> '.$_SESSION['success'].'</h2>';
-                unset($_SESSION['success']);
-            }
-            else if(isset($_SESSION['status']) && $_SESSION['status']!=''){
-                echo '<h2>'.$_SESSION['status'].'</h2>';
-                unset($_SESSION['status']);
-            }
-        ?>
+    
         <?php
             $connection = mysqli_connect("localhost","root","","bloodline");
+            // $connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
+
+        
             if(isset($_POST['edit_btn']))
             {
                 $id = $_POST['edit_id'];
@@ -42,8 +38,8 @@ include('security.php');
                             </div>
                             <div class="form-group">
                             <label for="" class="control-label">Gender</label>
-                            <select name="edit_cantren" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['gender'] ?>"> Select Gender</option>
+                            <select name="edit_gender" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['gender'] ?>"> <?php echo $row['gender'] ?></option>
                                 <option value = "Female"> Female </option>
                                 <option value = "Male"> Male </option>
                             </select>
@@ -73,7 +69,7 @@ include('security.php');
                             <div class="form-group">
                             <label for="" class="control-label">Blood Group</label>
                             <select name="edit_bloodGroup" id="" class="custom-select select2" required>
-                                <option value =" <?php echo $row['bloodGroup'] ?>"> Select Blood group</option>
+                                <option value =" <?php echo $row['bloodGroup'] ?>"><?php echo $row['bloodGroup'] ?></option>
                                 <option value = "A+">A+</option>
                                 <option value = "A-">A-</option>
                                 <option value = "B+">B+</option>
@@ -88,7 +84,7 @@ include('security.php');
                              <div class="form-group">
                             <label for="" class="control-label">Status</label>
                             <select name="edit_status" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['status'] ?>"> Select status</option>
+                                <option value ="<?php echo $row['status'] ?>"><?php echo $row['status'] ?></option>
                                 <option value="0"> pending </option>
                                 <option value="1"> testing </option>
                                 <option value="2"> storage </option>
@@ -97,6 +93,7 @@ include('security.php');
                                 </select>
                              </div>
                    
+                             
                             <a href="donor.php" class="btn btn-danger"> CANCEL </a>
                             <button type="submit" name="updatebtn" class="btn btn-primary"> UPDATE </button>
                         </form>

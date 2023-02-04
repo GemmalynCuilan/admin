@@ -1,41 +1,37 @@
 <?php
+@session_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 include('security.php');
+include('includes/scripts.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> PHP CRUD with Bootstrap Modal </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" style = "css">
-</head>
-<body>
-<script>
-    $(document).ready( function () {
-    $('.table').DataTable();
-} );
-</script>
-<div class="container-fluid">
-
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script>$(document).ready(function () {
+        $('#example').DataTable();
+    });
+    </script>
+    </head>
+    <body>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">List of Blood Requests</h6>
-            <span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right" href="javascript:void(0)" id="new_request">
-					<i class="fa fa-plus"></i> New Entry
-				</a></span>
+            <h6 class="m-0 font-weight-bold text-danger">List of Blood Requests</h6>
+            
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-            <?php
+       <?php
                 $query = "SELECT * FROM requests";
                 $query_run = mysqli_query($connection, $query);
             ?>
-                <table class="table " id="dataTable" width="100%" cellspacing="0">
+               
+                    <table id="example" class="display" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th> ID </th>
@@ -48,8 +44,7 @@ include('security.php');
                             <th> Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
+                    <?php
                         if(mysqli_num_rows($query_run) > 0)        
                         {
                             while($row = mysqli_fetch_assoc($query_run))
@@ -75,8 +70,8 @@ include('security.php');
                                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                                     <button type = "submit" name="edit_btn" class ="btn btn-sm btn-outline-primary">EDIT</button>
     
-                                     <button class="btn btn-sm btn-outline-success updatebtn" type="button" data-id="<?php echo $row['id'] ?>">Update</button>
-                                     <button class="btn btn-sm btn-outline-danger delete_btn" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>						
+                                     <button class="btn btn-sm btn-outline-success updatebtn" type="button" data-id="<?php echo $row['id'] ?>">SEND</button>
+                                     <button class="btn btn-sm btn-outline-danger delete_btn" type="button" data-id="<?php echo $row['id'] ?>">DELETE</button>						
                                      </form>
                                     </td>
                                     
@@ -88,10 +83,8 @@ include('security.php');
                             echo "No Record Found";
                         }
                         ?>
-                        
-                    </tbody>
-                </table>
-            <!-- Modal -->
+                        </tbody>
+                         <!-- Modal -->
             <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -152,19 +145,14 @@ include('security.php');
                 </div>
             </div>
 
-            </div>
-        </div>
-    </div>
-
-</div>
+    </table>
+</body>
+</html>
 <!-- /.container-fluid -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" ></script>
-    <script>
+  
+<script>
     $(document).ready( function () {
     $('.table').DataTable();
 } );
@@ -197,7 +185,3 @@ include('security.php');
             });
         });
     </script>
-<?php
-include('includes/scripts.php');
-include('includes/footer.php');
-?>

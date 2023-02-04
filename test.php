@@ -1,6 +1,7 @@
 <?php
 session_start();
 $connection = mysqli_connect("localhost","root","","bloodline");
+//$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 if(isset($_POST['updatebtn']))
 {
     $id = $_POST['edit_id'];
@@ -18,19 +19,22 @@ if(isset($_POST['updatebtn']))
 
     if($query_run)
     {
-        $_SESSION['success'] = "Your Data is Updated";
+        $_SESSION['status'] = "User Data is Updated";
+        $_SESSION['status_code'] = "success";
         header('Location: donor.php'); 
     }
     else
     {
-        $_SESSION['status'] = "Your Data is NOT Updated";
+        $_SESSION['status'] = "User Data is Not Updated";
+        $_SESSION['status_code'] = "error";
         header('Location: donor.php'); 
     }
 }
 ?>
         <?php
-        include('security.php');
+        session_start();
         $connection = mysqli_connect("localhost","root","","bloodline");
+        //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
         if(isset($_POST['editbtn']))
         {
             $id = $_POST['edit_id'];
@@ -41,24 +45,26 @@ if(isset($_POST['updatebtn']))
             $status = $_POST['edit_status'];
             $query = "UPDATE event SET title='$title', dtevent='$dtevent', name='$name' , description='$description', status='$status' WHERE id='$id' ";
             
-            $query_run = mysqli_query($connection, $query);
-
             if($query_run)
             {
-                echo '<script> alert("Data Updated"); </script>';
-                header('Location: announcement.php');
+                $_SESSION['status'] = "Data is Updated";
+                $_SESSION['status_code'] = "success";
+                header('Location: announcement.php'); 
             }
             else
             {
-                echo '<script> alert("Data Not Updated"); </script>';
+                $_SESSION['status'] = "Data is Not Updated";
+                $_SESSION['status_code'] = "error";
+                header('Location: announcement.php'); 
             }
         }
         ?>
 
            
         <?php
-
+        session_start();
         $connection = mysqli_connect("localhost","root","");
+        //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
         $db = mysqli_select_db($connection, 'bloodline');
 
         if(isset($_POST['eventBtn']))
@@ -73,13 +79,17 @@ if(isset($_POST['updatebtn']))
 
             if($query_run)
             {
-                echo '<script> alert("Data Saved"); </script>';
-                header('Location: announcement.php');
+                $_SESSION['status'] = "Data is Added";
+                $_SESSION['status_code'] = "success";
+                header('Location: announcement.php'); 
             }
             else
             {
-                echo '<script> alert("Data Not Saved"); </script>';
+                $_SESSION['status'] = "Data is Not Added";
+                $_SESSION['status_code'] = "error";
+                header('Location: announcement.php'); 
             }
         }
 
         ?>
+       

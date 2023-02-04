@@ -1,88 +1,85 @@
 <?php
+session_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 include('security.php');
+include('includes/scripts.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Bloodline </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-    
-</head>
-<body>
-
-</script>
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Announcement</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <form action="test.php" method="POST">
-        <div class="modal-body">
-
-            <div class="form-group">
-                <label> Event Name</label>
-                <input type="text" name="title" class="form-control" placeholder="Enter Event Name">
-            </div>
-        
-            <div class="form-group">
-                <label>Event Date & Time</label>
-                <input type="datetime-local" name="dtevent" class="form-control" placeholder="Enter Starting time">
-            </div>
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" name="name" class="form-control" placeholder="Enter Location">
-            </div>
-            <div class="form-group">
-            <label for="message-text" class="col-form-label">Description:</label>
-            <textarea class="form-control" name="description" id="message-text"></textarea>
-          </div>
-        
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="eventBtn" class="btn btn-primary">Save</button>
-        </div>
-      </form>
-
-    </div>
-  </div>
-</div>
-
-
-            <div class="container-fluid">
-
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script>$(document).ready(function () {
+        $('#example').DataTable();
+    });
+    </script>
+    </head>
+    <body>
+    <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Manage Announcements
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+                <h6 class="m-0 font-weight-bold text-danger">Manage Announcements
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addadminprofile">
                         Add New Announcements
                         </button>
                 </h6>
             </div>
 
-            <div class="card-body">
+            </script>
+            <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Announcement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <form action="test.php" method="POST">
+                    <div class="modal-body">
 
-                <div class="table-responsive">
-                <?php
+                        <div class="form-group">
+                            <label> Event Name</label>
+                            <input type="text" name="title" class="form-control" placeholder="Enter Event Name">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Event Date & Time</label>
+                            <input type="datetime-local" name="dtevent" class="form-control" placeholder="Enter Starting time">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter Location">
+                        </div>
+                        <div class="form-group">
+                        <label for="message-text" class="col-form-label">Description:</label>
+                        <textarea class="form-control" name="description" id="message-text"></textarea>
+                    </div>
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="eventBtn" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+            </div>
+                         <?php
                             $query = "SELECT * FROM event";
                             $query_run = mysqli_query($connection, $query);
-                        ?>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
+                          ?>
+               
+                    <table id="example" class="display" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
                             <th> ID </th>
                             <th> Event Name </th>
                             <th> Event Date & Time  </th>
@@ -92,8 +89,8 @@ include('security.php');
                             <th> Action </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <?php
+                    <tbody>
+                    <?php
                         if(mysqli_num_rows($query_run) > 0)        
                         {
                             while($row = mysqli_fetch_assoc($query_run))
@@ -133,6 +130,37 @@ include('security.php');
                         ?>
                     </tbody>
                 </table>
+            <!-- Post Modal -->
+            <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Notification</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="donor.php" method="POST">
+
+                        <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Send message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- DELETE POP UP FORM  -->
                 <div class="modal fade" id="deletedmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -162,17 +190,22 @@ include('security.php');
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </table>
+</body>
+</html>
+<!-- /.container-fluid -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+  
     <script>
+    $(document).ready( function(){
+        $('.editbtn').on('click',function(){
+            $('#editmodal').modal('show');
+        });
+    });
+</script>
+
+<script>
         $(document).ready(function () {
 
             $('.deletedbtn').on('click', function () {
@@ -192,7 +225,3 @@ include('security.php');
             });
         });
     </script>
-<?php
-include('includes/scripts.php');
-include('includes/footer.php');
-?>

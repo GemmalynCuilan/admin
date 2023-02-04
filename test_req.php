@@ -1,6 +1,8 @@
 <?php
+session_start();
 include('security.php');
 $connection = mysqli_connect("localhost","root","","bloodline");
+//$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 if(isset($_POST['update']))
 {
     $id = $_POST['edit_id'];
@@ -15,12 +17,14 @@ if(isset($_POST['update']))
 
     if($query_run)
     {
-        $_SESSION['success'] = "Your Data is Updated";
+        $_SESSION['status'] = "User Data is Updated";
+        $_SESSION['status_code'] = "success";
         header('Location: request.php'); 
     }
     else
     {
-        $_SESSION['status'] = "Your Data is NOT Updated";
+        $_SESSION['status'] = "User Data is Not Updated";
+        $_SESSION['status_code'] = "error";
         header('Location: request.php'); 
     }
 }

@@ -1,5 +1,7 @@
 <?php
+@session_start();
 $connection = mysqli_connect("localhost","root","");
+//$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 $db = mysqli_select_db($connection, 'bloodline');
 
 if(isset($_POST['deletebtn']))
@@ -11,18 +13,23 @@ if(isset($_POST['deletebtn']))
 
     if($query_run)
     {
-        echo '<script> alert("Data Deleted"); </script>';
-        header("Location:donor.php");
+        $_SESSION['status'] = "User Data is Deleted";
+        $_SESSION['status_code'] = "success";
+        header('Location: donor.php'); 
     }
     else
     {
-        echo '<script> alert("Data Not Deleted"); </script>';
+        $_SESSION['status'] = "User Data is Not Deleted";
+        $_SESSION['status_code'] = "error";
+        header('Location: donor.php'); 
     }
 }
 
 ?>
 <?php
+@session_start();
 $connection = mysqli_connect("localhost","root","");
+//$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 $db = mysqli_select_db($connection, 'bloodline');
 
 if(isset($_POST['delete_btn']))
@@ -34,18 +41,22 @@ if(isset($_POST['delete_btn']))
 
     if($query_run)
     {
-        echo '<script> alert("Data Deleted"); </script>';
-        header("Location:request.php");
+        $_SESSION['status'] = "User Data is Deleted";
+        $_SESSION['status_code'] = "success";
+        header('Location: request.php'); 
     }
     else
     {
-        echo '<script> alert("Data Not Deleted"); </script>';
+        $_SESSION['status'] = "User Data is Not Deleted";
+        $_SESSION['status_code'] = "error";
+        header('Location: request.php'); 
     }
 }
-
 ?>
 <?php
+@session_start();
 $connection = mysqli_connect("localhost","root","");
+//$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 $db = mysqli_select_db($connection, 'bloodline');
 
 if(isset($_POST['deletedbtn']))
@@ -57,13 +68,17 @@ if(isset($_POST['deletedbtn']))
 
     if($query_run)
     {
-        echo '<script> alert("Data Deleted"); </script>';
-        header('Location: announcement.php');
+        $_SESSION['status'] = "User Data is Deleted";
+        $_SESSION['status_code'] = "success";
+        header('Location: announcement.php'); 
     }
     else
     {
-        echo '<script> alert("Data Not Deleted"); </script>';
+        $_SESSION['status'] = "User Data is Not Deleted";
+        $_SESSION['status_code'] = "error";
+        header('Location: announcement.php'); 
     }
+
 }
 
 ?>

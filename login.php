@@ -3,9 +3,6 @@ session_start();
 include('includes/header.php'); 
 ?>
 
-
-
-
 <div class="container">
 
 <!-- Outer Row -->
@@ -21,40 +18,29 @@ include('includes/header.php');
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
-                <?php
-                include_once 'dbconfig.php';
-                if(isset($_POST['login_btn']))
-                {	 
-                    $username = $_POST['username'];
-                    $password = $_POST['password'];
-                
-                    $sql = "SELECT * from admin where username ='$username' and password='" .$password. "'";
-                    $result = mysqli_query($conn, $select);
+            <?php 
+              if(isset($_SESSION['status']) && $_SESSION['status'] != ''){
+                echo '<h2 class = "bg-danger text-white"> '.$_SESSION['status'].'</h2>';
+                unset($_SESSION['status']);
+              }
+            
+            ?>
+             </div>
+             
+             <div class="form-container">
 
-                  if(mysqli_num_rows($result) > 0){
-
-                      $row = mysqli_fetch_array($result);
-
-                  }else{
-                      $error[] = 'incorrect username or password!';
-                  }
-                }
-                ?>
-              </div>
-
-                <form class="user" action="home.php" method="POST">
+                <form class="user" action="code.php" method="POST">
 
                     <div class="form-group">
-                    <input type="username" name="username" class="form-control form-control-user" placeholder="Enter username">
+                    <input type="text" name="username" class="form-control form-control-user" required placeholder="Enter your Username">
                     </div>
                     <div class="form-group">
-                    <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-user" required placeholder="Enter your Password">
                     </div>
             
-                    <button type="submit" name="login_btn" class="btn btn-primary btn-user btn-block"> Login </button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-user btn-block"> Login </button>
                     <hr>
                     <p>Don't have an account? <a href="index.php">Register now</a></p>
-                
                 </form>
 
 

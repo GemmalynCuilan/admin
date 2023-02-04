@@ -6,7 +6,6 @@ include('includes/navbar.php');
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-  
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -15,8 +14,8 @@ include('includes/navbar.php');
 
   <!-- Content Row -->
   <div class="row">
-    
-    <!-- Registered donor -->
+
+    <!-- Total registered donor -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -24,7 +23,6 @@ include('includes/navbar.php');
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Registered Donor</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-
               <?php
                 require 'dbconfig.php';
                 $query = "SELECT id FROM donor ORDER BY id";  
@@ -35,14 +33,14 @@ include('includes/navbar.php');
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            <i class="fas fa-calendar fa-2x text-red-300"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Pending requests -->
+    <!-- Requests -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
         <div class="card-body">
@@ -55,9 +53,9 @@ include('includes/navbar.php');
                 $query = "SELECT id FROM requests ORDER BY id";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> Total Requests: '.$row.'</h4>';
+                echo '<h5> Total Requests: '.$row.'</h5>';
             ?>
-            </div>
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -67,15 +65,38 @@ include('includes/navbar.php');
       </div>
     </div>
 
-
-
-    <!-- Pending Requests -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <!-- Upcoming Events -->
+ <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Announcement&Events</div>
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Upcoming events</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+              <?php
+                require 'dbconfig.php';
+                $query = "SELECT id FROM event ORDER BY id";  
+                $query_run = mysqli_query($connection, $query);
+                $row = mysqli_num_rows($query_run);
+                echo '<h4>'.$row.'</h4>';
+            ?>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-comments fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Announcement Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-danger shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Announcement</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
               <?php
                 require 'dbconfig.php';
@@ -96,216 +117,170 @@ include('includes/navbar.php');
   </div>
 
   <!-- Content Row -->
-  <div class="row">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    
-  </div>
-    <!-- Registered A+ -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group A+</div>
-              <div class="h2 mb-0 font-weight-bold text-gray-800">
-
-              <?php
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-blue">
+                <div class="inner">
+                    <h1> A+ </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'A+' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
-            ?>
-              </div>
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
+                ?>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="A+.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-              <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-        <!-- Registered A- -->
-        <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group A-</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-
-              <?php
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-green">
+                <div class="inner">
+                    <h1> A- </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'A-' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
             ?>
-              </div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="a-.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-
-        <!-- Registered B+ -->
-        <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group B+</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-
-              <?php
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-orange">
+                <div class="inner">
+                <h1> B+ </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'B+' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
-            ?>
-              </div>
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
+                ?>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="b+.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-        <!-- Registered B- -->
-        <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group B-</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-
-              <?php
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-red">
+                <div class="inner">
+                <h1> B- </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'B-' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
-            ?>
-              </div>
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
+                ?>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="b-.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-       <!-- Registered AB+ -->
-       <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group AB+</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
+    
+</div>
 
-              <?php
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-blue">
+                <div class="inner">
+                    <h1> AB+ </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'AB+' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
             ?>
-              </div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="ab+.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-        <!-- Registered AB- -->
-        <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group AB-</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
 
-              <?php
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-green">
+                <div class="inner">
+                    <h1> AB- </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'AB-' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
             ?>
-              </div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="ab-.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-        <!-- Registered O+ -->
-        <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group O+</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-
-              <?php
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-orange">
+                <div class="inner">
+                <h1> O+ </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'O+' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
-            ?>
-              </div>
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
+                ?>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="o+.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-
-        <!-- Registered O- -->
-        <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-danger shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">Blood Group O-</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-
-              <?php
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-red">
+                <div class="inner">
+                <h1> O- </h1>
+                    <?php
                 require 'dbconfig.php';
                 $query = "SELECT bloodGroup FROM donor where bloodGroup like 'O-' Order by bloodGroup ";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
-                echo '<h4> '.$row.'</h4>';
-            ?>
-              </div>
+                echo '<h4> '.'Blood Group: '.$row.'</h4>';
+                ?>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                </div>
+                <a href="o-.php" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-tint fa-2x text-gray-900"></i>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
+    
+</div>
 
-   
-  </div>
+
+
+
+
 
   <?php
 include('includes/scripts.php');

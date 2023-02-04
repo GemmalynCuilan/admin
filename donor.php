@@ -1,38 +1,39 @@
 <?php
+@session_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 include('security.php');
+include('includes/scripts.php');
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Bloodline </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-</head>
-<body>
-<div class="container-fluid">
-
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script>$(document).ready(function () {
+        $('#example').DataTable();
+    });
+    </script>
+    </head>
+    <body>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-           
-        <h6 class="m-0 font-weight-bold text-primary">Donor Registration list</h6>
-            <span class="float:right"><a class="btn btn-primary btn-block btn-sm col-sm-2 float-right" href="javascript:void(0)" id="new_request">
-					<i class="fa fa-plus"></i> New Entry
-				</a></span>
-        
-          </div>
-        <div class="card-body">
-            <div class="table-responsive">
-            <?php
-                $query = "SELECT * FROM donor";
-                $query_run = mysqli_query($connection, $query);
+        <h6 class="m-0 font-weight-bold text-danger">Donor Registration list</h6>
+            
+        </div>
+      <?php
+          $query = "SELECT * FROM donor";
+          $query_run = mysqli_query($connection, $query);
             ?>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+               
+                    <table id="example" class="display" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th> ID </th>
@@ -45,7 +46,7 @@ include('security.php');
                             <th> Status</th>
                             <th> Action</th>
                         </tr>
-                    </thead>
+                        </thead>
                     <tbody>
                         <?php
                         if(mysqli_num_rows($query_run) > 0)        
@@ -80,7 +81,7 @@ include('security.php');
                                     <form action = "edit.php" method="post">
                                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                                     <button type = "submit" name="edit_btn" class ="btn btn-sm btn-outline-primary">EDIT</button>
-                                    <button class="btn btn-sm btn-outline-success updatebtn" type="button" data-id="<?php echo $row['id'] ?>">UPDATE</button>
+                                    <button class="btn btn-sm btn-outline-success sendbtn" type="button" data-id="<?php echo $row['id'] ?>">SEND</button>
                                     <button class="btn btn-sm btn-outline-danger deletebtn" type="button" data-id="<?php echo $row['id'] ?>">DELETE</button>
 									</td>
                                     </form>
@@ -94,12 +95,39 @@ include('security.php');
                                 ?>
                             </tbody>
                         </table>
-                    <!-- EDIT Modal -->
-                <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+                        <?php
+                    if(isset($_POST['save'])){
+           // Authorisation details.
+           $username = "gemmalyncuilan@gmail.com";
+           $hash = "9181408c71a82c797c00ac4e32c863ad595f0aa45953504f98a745d9c0e0d2f9";
+
+           // Config variables. Consult http://api.txtlocal.com/docs for more info.
+           $test = "0";
+
+           // Data for text message. This is the text message data.
+           $sender = $_POST['sender']; // This is who the message appears to be from.
+           $numbers = $_POST['number'];// A single number or a comma-seperated list of numbers
+           $message = $_POST['message'];
+           // 612 chars or less
+           // A single number or a comma-seperated list of numbers
+           $message = urlencode($message);
+           $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+           $ch = curl_init('https://api.txtlocal.com/send/?');
+           curl_setopt($ch, CURLOPT_POST, true);
+           curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+           $result = curl_exec($ch); // This is the result from the API
+           curl_close($ch);
+           echo($result);
+            }
+         
+                ?>
+                   <div class="modal fade" id="sendmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Notification</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -107,26 +135,31 @@ include('security.php');
                         <form action="donor.php" method="POST">
 
                         <div class="modal-body">
+                        <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Sender:</label>
+                                <input type="text" class="form-control" name="sender">
+                            </div>
                         <form>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <input type="text" class="form-control" name="number">
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" name="message"></textarea>
                             </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button type="submit" class="btn btn-primary" name = "save" >Send message</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                 <!-- DELETE POP UP FORM  -->
-            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                       
+                <!-- DELETE POP UP FORM  -->
+                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -154,21 +187,17 @@ include('security.php');
                     </div>
                 </div>
             </div>
-
-            </div>
-        </div>
-    </div>
-
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </table>
+</body>
+</html>
+<!-- /.container-fluid -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-<script>
+  
+    <script>
     $(document).ready( function(){
-        $('.updatebtn').on('click',function(){
-            $('#updatemodal').modal('show');
+        $('.sendbtn').on('click',function(){
+            $('#sendmodal').modal('show');
         });
     });
 </script>
@@ -193,7 +222,3 @@ include('security.php');
             });
         });
     </script>
-<?php
-include('includes/scripts.php');
-include('includes/footer.php');
-?>

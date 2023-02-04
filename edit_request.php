@@ -1,7 +1,8 @@
 <?php
+session_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
-include('security.php');
+
 ?>
 
 <div class="container-fluid">
@@ -14,6 +15,7 @@ include('security.php');
         <div class="card-body">
         <?php
             $connection = mysqli_connect("localhost","root","","bloodline");
+            //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
             if(isset($_POST['edit_btn']))
             {
                 $id = $_POST['edit_id'];
@@ -47,7 +49,7 @@ include('security.php');
                             <div class="form-group">
                             <label for="" class="control-label">Blood Group</label>
                             <select name="edit_bloodGroup" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['bloodGroup'] ?>"> Select blood group</option>
+                                <option value ="<?php echo $row['bloodGroup'] ?>"> <?php echo $row['bloodGroup'] ?></option>
                                 <option value = "A+">A+</option>
                                 <option value = "A-">A-</option>
                                 <option value = "B+">B+</option>
@@ -58,14 +60,14 @@ include('security.php');
                                 <option value = "O-">O-</option>
                             </select>
                         </div>
-
+                      
                         <div class="form-group">
-                        <label for="">Status</label>
-                        <select name="edit_status">
-                            <option value=""> Select Status </option>
-                            <option value="0"> pending </option>
-                            <option value="1"> approved </option>
-                        </select>
+                            <label for="" class="control-label">Status</label>
+                            <select name="edit_status" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['status'] ?>"> <?php echo $row['status'] ?></option>
+                                <option value="0"> pending </option>
+                                <option value="1"> approved </option>
+                            </select>
                         </div>
                             <a href="request.php" class="btn btn-danger"> CANCEL </a>
                             <button type="submit" name="update" class="btn btn-primary"> UPDATE </button>
