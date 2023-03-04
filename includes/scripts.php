@@ -16,7 +16,6 @@
   <script src="js/demo/chart-pie-demo.js"></script>
  
   <script src="js/sweetalert.min.js"></script>
-
         <?php
          if(isset($_SESSION['status']) && $_SESSION['status']!=''){
             ?>
@@ -25,17 +24,16 @@
             title: "<?php echo $_SESSION['status'];?>",
             //text: "You clicked the button!",
             icon: "<?php echo $_SESSION['status_code'];?>",
-            button: "Close!",
+            button: "Ok",
             });
             </script>
             <?php
             unset($_SESSION['status']);
              }
             ?>
-        <?php
-    
+<?php
 
-$connection = mysqli_connect('localhost','root','','bloodline');
+$connection = mysqli_connect('localhost','root','','bloodlinenew');
 
 if(isset($_POST['registerbtn']))
 {

@@ -3,7 +3,7 @@
 $server_name = "localhost";
 $db_username = "root";
 $db_password = "";
-$db_name = "bloodline";
+$db_name = "bloodlinenew";
 
 $connection = mysqli_connect($server_name,$db_username,$db_password,$db_name);
 

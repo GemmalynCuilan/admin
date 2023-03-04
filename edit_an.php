@@ -1,5 +1,5 @@
 <?php
-@session_start();
+session_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 include('security.php');
@@ -14,53 +14,56 @@ include('security.php');
         </div>
         <div class="card-body">
         <?php
-            $connection = mysqli_connect("localhost","root","","bloodline");
+            $connection = mysqli_connect("localhost","root","","bloodlinenew");
             //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
-            if(isset($_POST['editbtn']))
+            if(isset($_POST['edit_btn']))
             {
                 $id = $_POST['edit_id'];
                 
-                $query = "SELECT * FROM event WHERE id='$id' ";
+                $query = "SELECT * FROM event WHERE event_id='$event_id' ";
                 $query_run = mysqli_query($connection, $query);
 
                 foreach($query_run as $row){
                      ?>
-                        <form action="test.php" method="POST">
-                            <input type="text" name="edit_id" value="<?php echo $row['id'] ?>">
+                   
+        <div style="height: 400px; overflow-y: auto;">
+			<table id="example" class="table table-striped table-bordered">
+                        <form action="test_an.php" method="POST">
+                            <input type="hidden" name="edit_id" value="<?php echo $row['event_id'] ?>">
                             <div class="form-group">
-                                <label> Event Name </label>
-                                <input type="text" name="edit_title" value="<?php echo $row['title'] ?>" class="form-control"
-                                    placeholder="Enter Event Name">
+                                <label> Event name</label>
+                                <input type="text" name="edit_name" value="<?php echo $row['event_name'] ?>" class="form-control"
+                                    placeholder="Enter Event Name" required>
                             </div>
-
                             <div class="form-group">
-                                <label>Event Date & Time</label>
-                                <input type="datetime-local" name="edit_dtevent" value="<?php echo $row['dtevent'] ?>" class="form-control"
-                                    placeholder="Enter Event Date & Time">
+                                <label> Event description</label>
+                                <input type="text" name="edit_description" value="<?php echo $row['event_description'] ?>" class="form-control"
+                                    placeholder="Enter Event Description" required>
                             </div>
-
                             <div class="form-group">
-                                <label>Location</label>
-                                <input type="text" name="edit_name" value="<?php echo $row['name'] ?>" class="form-control"
-                                    placeholder="Enter Location">
+                                <label> Event venue</label>
+                                <input type="text" name="edit_venue" value="<?php echo $row['event_venue'] ?>" class="form-control"
+                                    placeholder="Enter Event venue" required>
                             </div>
-
                             <div class="form-group">
-                                <label>Description</label>
-                                <input type="text" name="edit_description" value="<?php echo $row['description'] ?>" class="form-control"
-                                    placeholder="Enter Description">
+                                <label>Event Start Date</label>
+                                <input type="date" name="edit_start_date" value="<?php echo $row['event_start_date'] ?>" class="form-control"
+                                    placeholder="Enter Event Start Date"  required>
                             </div>
-
-                        <div class="form-group">
-                            <label for="" class="control-label">Status</label>
-                            <select name="edit_status" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['status'] ?>"> <?php echo $row['status'] ?></option>
-                                <option value="0"> pending </option>
-                                <option value="1"> posted </option>
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label>Event End Date</label>
+                                <input type="date" name="edit_end_date" value="<?php echo $row['event_end_date'] ?>" class="form-control"
+                                    placeholder="Enter Event End Date"  required>
+                            </div>
+                            <div class="form-group">
+                                <label>Time</label>
+                                <input type="time" name="edit_time" value="<?php echo $row['event_time'] ?>" class="form-control"
+                                    placeholder="Enter time"  required>
+                            </div>
+                            <td align="right">
                             <a href="announcement.php" class="btn btn-danger"> CANCEL </a>
-                            <button type="submit" name="editbtn" class="btn btn-primary"> UPDATE </button>
+                            <button type="submit" name="eventbtn" class="btn btn-primary"> UPDATE </button>
+                              </td>
                         </form>
                  <?php
                 }
@@ -71,3 +74,5 @@ include('security.php');
 </div>
 
 </div>
+</div>       
+    </table>

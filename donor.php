@@ -5,8 +5,6 @@ include('includes/navbar.php');
 include('security.php');
 include('includes/scripts.php');
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +15,15 @@ include('includes/scripts.php');
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+form {
+  display:inline-block;
+  margin: 0 0 5px;
+
+}
+</style>
     <script>$(document).ready(function () {
         $('#example').DataTable();
     });
@@ -25,141 +32,110 @@ include('includes/scripts.php');
     <body>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-danger">Donor Registration list</h6>
+            <h6 class="m-0 font-weight-bold text-danger">Donor Registration List</h6>
             
         </div>
-      <?php
-          $query = "SELECT * FROM donor";
-          $query_run = mysqli_query($connection, $query);
+       <?php
+                $query = "SELECT* from donor ORDER by id DESC";
+                $query_run = mysqli_query($connection, $query);
             ?>
                
-                    <table id="example" class="display" width="100%" cellspacing="0">
+        <div style="height: 450px; overflow-y: auto;">
+        <table id="example" class="table table-hover table-light">
                     <thead>
                         <tr>
-                            <th> ID </th>
-                            <th> Username </th>
-                            <th> Gender </th>
-                            <th> Age </th>
-                            <th> Address </th>
-                            <th> Mobile number </th>
-                            <th> Blood group</th>
+                        <th style="display:none;"> Indentification No.</th>
+                        <th style="display:none;"> ID </th>
+                            <th> Lastname</th>
+                            <th> Firstname</th>
+                            <th style="display:none;"> Middlename</th>
+                            <th style="display:none;"> Password</th>
+                            <th style="display:none;"> Birthdate </th>
+                            <th style="display:none;"> Age </th>
+                            <th style="display:none;"> Sex</th>
+                            <th> Blood Group</th>
+                            <th style="display:none;"> Identification</th>
+                            <th style="display:none;"> Street</th>
+                            <th style="display:none;"> Barangay</th>
+                            <th style="display:none;"> Town/Municipality</th>
+                            <th style="display:none;"> City</th>
+                            <th style="display:none;"> Zip Code</th>
+                            <th> Mobile Number</th>
+                            <th> Email Address</th>
+                            <th> Identification ID</th>
                             <th> Status</th>
                             <th> Action</th>
+                            
                         </tr>
-                        </thead>
-                    <tbody>
-                        <?php
+                    </thead>
+                    
+                    <?php
                         if(mysqli_num_rows($query_run) > 0)        
                         {
                             while($row = mysqli_fetch_assoc($query_run))
                             {
                         ?>
                             <tr>
-                                <td><?php  echo $row['id']; ?></td>
-                                <td><?php  echo $row['username']; ?></td>
-                                <td><?php  echo $row['gender']; ?></td>
-                                <td><?php  echo $row['age']; ?></td>
-                                <td><?php  echo $row['address']; ?></td>
-                                <td><?php  echo $row['mobileNumber']; ?></td>
+                            <td style="display:none;"><?php  echo $row['idno']; ?></td>
+                            <td style="display:none;"><?php  echo $row['id']; ?></td>
+                                <td><?php  echo $row['lastname']; ?></td>
+                                <td><?php  echo $row['firstname']; ?></td>
+                                <td style="display:none;"><?php  echo $row['middlename']; ?></td>
+                                <td style="display:none;"><?php  echo $row['password']; ?></td>
+                                <td style="display:none;"><?php  echo $row['birthdate']; ?></td>
+                                <td style="display:none;"><?php  echo $row['age']; ?></td>
+                                <td style="display:none;"><?php  echo $row['sex']; ?></td>
                                 <td><?php  echo $row['bloodGroup']; ?></td>
-                                
+                                <td style="display:none;"><?php  echo $row['identifyno']; ?></td>
+                                <td style="display:none;"><?php  echo $row['street']; ?></td>
+                                <td style="display:none;"><?php  echo $row['barangay']; ?></td>
+                                <td style="display:none;"><?php  echo $row['tm']; ?></td>
+                                <td style="display:none;"><?php  echo $row['city']; ?></td>
+                                <td style="display:none;"><?php  echo $row['code']; ?></td>
+                                <td><?php  echo $row['mobileNumber']; ?></td>
+                                <td><?php  echo $row['email']; ?></td>
+                                <td><?php echo '<img src="Images/'.$row['reqimg'].'" width="100px;" height="100px;" alt="Image">'?></td>
+                            
                                 <td class=" text-center">
-										<?php if($row['status'] == 0){
-                                            echo '<span class="badge badge-primary">Pending</span>';
-                                        }else if ($row['status'] == 1){
-                                            echo '<span class="badge badge-danger">Testing</span>';
-                                        }else if ($row['status'] == 2){
-                                            echo '<span class="badge badge-warning">Storage</span>';
-                                        }else if ($row['status'] == 3){
-                                            echo '<span class="badge badge-info">Distribution</span>';
-                                        }else if ($row['status'] == 4){
-                                            echo '<span class="badge badge-success">Transfusion</span>';
+                                        <?php if($row['status'] == "active"){
+                                            echo '<span class="badge badge-primary">Active</span>';
+                                        }else if ($row['status'] == "inactive"){
+                                            echo '<span class="badge badge-success">Inactive</span>';
                                         }
                                         ?>	
 									</td>
-                                <td class="text-center">
+                                    <div class="container my-3 bg-light">
+                                <td style="text-align">
                                     <form action = "edit.php" method="post">
                                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="edit_btn" class ="btn btn-sm btn-outline-primary">EDIT</button>
-                                    <button class="btn btn-sm btn-outline-success sendbtn" type="button" data-id="<?php echo $row['id'] ?>">SEND</button>
-                                    <button class="btn btn-sm btn-outline-danger deletebtn" type="button" data-id="<?php echo $row['id'] ?>">DELETE</button>
-									</td>
+                                    <button type = "submit" name="edit_btn" class ="btn btn-warning btn-m"> <i class="fa fa-pencil-square-o"></i>&nbsp;</button>
                                     </form>
-                                    </tr>
-                                <?php
-                                    } 
-                                }
-                                else {
-                                    echo "No Record Found";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-
+                                    <form action = "send.php" method="post">
+                                    <input type="hidden" name="send_id" value="<?php echo $row['id']; ?>">
+                                    <button type = "submit" name="send_btn" class ="btn btn-info btn-m"> <i class="fa fa-commenting"></i>&nbsp;</button>
+                                    </form>
+                                    <form action = "delete.php" method="post">
+                                    <input type="hidden" name="deleteId" value="<?php echo $row['id']; ?>">
+                                    <button type = "submit" name="deletebtn" class ="btn btn-danger btn-m"> <i class="fa fa-archive"></i>&nbsp;</button>
+                                    </form>
+                                    <form action = "dl.php" method="post">
+                                    <input type="hidden" name="dl_id" value="<?php echo $row['id']; ?>">
+                                    <button type = "submit" name="dl_btn" class ="btn btn-primary btn-m"> <i class="fa fa-download"></i>&nbsp;</button>
+                                    </form>
+                                    </div>
+                               
+                            </tr>
                         <?php
-                    if(isset($_POST['save'])){
-           // Authorisation details.
-           $username = "gemmalyncuilan@gmail.com";
-           $hash = "9181408c71a82c797c00ac4e32c863ad595f0aa45953504f98a745d9c0e0d2f9";
-
-           // Config variables. Consult http://api.txtlocal.com/docs for more info.
-           $test = "0";
-
-           // Data for text message. This is the text message data.
-           $sender = $_POST['sender']; // This is who the message appears to be from.
-           $numbers = $_POST['number'];// A single number or a comma-seperated list of numbers
-           $message = $_POST['message'];
-           // 612 chars or less
-           // A single number or a comma-seperated list of numbers
-           $message = urlencode($message);
-           $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-           $ch = curl_init('https://api.txtlocal.com/send/?');
-           curl_setopt($ch, CURLOPT_POST, true);
-           curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-           $result = curl_exec($ch); // This is the result from the API
-           curl_close($ch);
-           echo($result);
-            }
-         
-                ?>
-                   <div class="modal fade" id="sendmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="donor.php" method="POST">
-
-                        <div class="modal-body">
-                        <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Sender:</label>
-                                <input type="text" class="form-control" name="sender">
-                            </div>
-                        <form>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" name="number">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" name="message"></textarea>
-                            </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name = "save" >Send message</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                       
-                <!-- DELETE POP UP FORM  -->
-                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                            } 
+                        }
+                        else {
+                            echo "No Record Found";
+                        }
+                        ?>
+                        </tbody>
+                        
+           <!-- DELETE POP UP FORM  -->
+            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -169,12 +145,11 @@ include('includes/scripts.php');
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
                         <form action="delete.php" method="POST">
 
                             <div class="modal-body">
 
-                                <input type="hidden" name="delete_id" id="delete_id">
+                                <input type="hidden" name="deleteId" id="deleteId">
 
                                 <h4> Do you want to delete this data?</h4>
                             </div>
@@ -187,6 +162,7 @@ include('includes/scripts.php');
                     </div>
                 </div>
             </div>
+
     </table>
 </body>
 </html>
@@ -194,10 +170,15 @@ include('includes/scripts.php');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   
+<script>
+    $(document).ready( function () {
+    $('.table').DataTable();
+} );
+</script>
     <script>
     $(document).ready( function(){
-        $('.sendbtn').on('click',function(){
-            $('#sendmodal').modal('show');
+        $('.updatebtn').on('click',function(){
+            $('#updatemodal').modal('show');
         });
     });
 </script>
@@ -217,7 +198,7 @@ include('includes/scripts.php');
 
                 console.log(data);
 
-                $('#delete_id').val(data[0]);
+                $('#deleteId').val(data[0]);
 
             });
         });

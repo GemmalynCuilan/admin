@@ -5,7 +5,7 @@
         session_start();
         $connection = mysqli_connect("localhost","root","");
         //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
-        $db = mysqli_select_db($connection, 'bloodline');
+        $db = mysqli_select_db($connection, 'bloodlinenew');
 
         if(isset($_POST['submit']))
         {

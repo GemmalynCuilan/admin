@@ -15,6 +15,14 @@ include('includes/scripts.php');
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+form {
+  display:inline-block;
+  margin: 0 0 5px;
+
+}
+</style>
     <script>$(document).ready(function () {
         $('#example').DataTable();
     });
@@ -23,7 +31,7 @@ include('includes/scripts.php');
     <body>
     <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-danger">Manage Announcements
+                <h6 class="m-0 font-weight-bold text-danger">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addadminprofile">
                         Add New Announcements
                         </button>
@@ -40,32 +48,32 @@ include('includes/scripts.php');
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                
+
                 <form action="test.php" method="POST">
                     <div class="modal-body">
 
                         <div class="form-group">
                             <label> Event Name</label>
-                            <input type="text" name="title" class="form-control" placeholder="Enter Event Name">
+                            <input type="text" name="title" class="form-control" placeholder="Enter Event Name"  required>
                         </div>
                     
                         <div class="form-group">
                             <label>Event Date & Time</label>
-                            <input type="datetime-local" name="dtevent" class="form-control" placeholder="Enter Starting time">
+                            <input type="datetime-local" name="dtevent" class="form-control" placeholder="Enter Starting time"  required>
                         </div>
                         <div class="form-group">
                             <label>Location</label>
-                            <input type="text" name="name" class="form-control" placeholder="Enter Location">
+                            <input type="text" name="name" class="form-control" placeholder="Enter Location"  required>
                         </div>
                         <div class="form-group">
                         <label for="message-text" class="col-form-label">Description:</label>
-                        <textarea class="form-control" name="description" id="message-text"></textarea>
+                        <textarea class="form-control" name="description" id="message-text"  required></textarea>
                     </div>
                     
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="eventBtn" class="btn btn-primary">Save</button>
+                        <button type="submit" name="eventBtn" class="btn btn-primary">Post</button>
                     </div>
                 </form>
 
@@ -77,15 +85,15 @@ include('includes/scripts.php');
                             $query_run = mysqli_query($connection, $query);
                           ?>
                
-                    <table id="example" class="display" width="100%" cellspacing="0">
+               <div style="height: 500px; overflow-y: auto;">
+               <table id="example" class="table table-hover table-light">
                     <thead>
                     <tr>
-                            <th> ID </th>
+                    <td style="display:none;"> ID </th>
                             <th> Event Name </th>
                             <th> Event Date & Time  </th>
                             <th> Location </th>
                             <th> Description </th>
-                            <th> Status</th>
                             <th> Action </th>
                         </tr>
                         </thead>
@@ -97,29 +105,23 @@ include('includes/scripts.php');
                             {
                         ?>
                             <tr>
-                            <td><?php  echo $row['id']; ?></td>
+                         <td style="display:none;"><?php  echo $row['id']; ?></td>
                                 <td><?php  echo $row['title']; ?></td>
                                 <td><?php  echo $row['dtevent']; ?></td>
                                 <td><?php  echo $row['name']; ?></td>
                                 <td><?php  echo $row['description']; ?></td>
-                                <td class=" text-center">
-										<?php if($row['status'] == 0){
-                                            echo '<span class="badge badge-primary">Pending</span>';
-                                        }else if ($row['status'] == 1){
-                                            echo '<span class="badge badge-success">Posted</span>';
-                                        }
-                                        ?>	
-									</td>
+                    
 							</td>  
-                                <td class="text-center">
+                                    <td style="text-align" horizontal:align>
                                     <form action = "edit_an.php" method="post">
                                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="editbtn" class ="btn btn-sm btn-outline-primary">EDIT</button>
-
-                                     <button class="btn btn-sm btn-outline-success" type="button" data-id="<?php echo $row['id'] ?>">POST</button>
-                                     <button class="btn btn-sm btn-outline-danger deletedbtn" type="button" data-id="<?php echo $row['id'] ?>">DELETE</button>						
-									</td>
+                                    <button type = "submit" name="editbtn" class ="btn btn-warning btn-m"> <i class="fa fa-pencil-square-o"></i>&nbsp;</button>
                                     </form>
+                                    <form action = "delete.php" method="post">
+                                    <input type="hidden" name="deletedid" value="<?php echo $row['id']; ?>">
+                                    <button type = "submit" name="deletedbtn" class ="btn btn-danger btn-m"> <i class="fa fa-trash"></i>&nbsp;</button>
+                                    </form>
+                                    </td>
                             </tr>
                         <?php
                             } 
@@ -146,11 +148,11 @@ include('includes/scripts.php');
                         <form>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <input type="text" class="form-control" id="recipient-name"  required>
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" id="message-text"  required></textarea>
                             </div>
                             </form>
                         </div>

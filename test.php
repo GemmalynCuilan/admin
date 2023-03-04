@@ -1,19 +1,31 @@
 <?php
 session_start();
-$connection = mysqli_connect("localhost","root","","bloodline");
+$connection = mysqli_connect("localhost","root","","bloodlinenew");
 //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 if(isset($_POST['updatebtn']))
 {
     $id = $_POST['edit_id'];
-    $username = $_POST['edit_username'];
-    $gender = $_POST['edit_gender'];
-	$age = $_POST['edit_age'];
-	$address = $_POST['edit_address'];
+    $lastname = $_POST['edit_lastname'];
+    $firstname = $_POST['edit_firstname'];
+    $middlename = $_POST['edit_middlename'];
+	$password = $_POST['edit_password'];
+	$birthdate = $_POST['edit_birthdate'];
+    $age = $_POST['edit_age'];
+	$sex = $_POST['edit_sex'];
+    $bloodGroup = $_POST['edit_bloodGroup'];
+    $identifyno = $_POST['edit_identifyno'];
+    $street = $_POST['edit_street'];
+	$barangay = $_POST['edit_barangay'];
+    $tm = $_POST['edit_tm'];
+    $city = $_POST['edit_city'];
+    $code = $_POST['edit_code'];
     $mobileNumber = $_POST['edit_mobileNumber'];
-	$bloodGroup = $_POST['edit_bloodGroup'];
-    $password = $_POST['edit_password'];
-	$status = $_POST['edit_status'];
-    $query = "UPDATE donor SET username='$username', gender='$gender', age='$age',  address='$address',  mobileNumber='$mobileNumber', bloodGroup='$bloodGroup', password='$password',status='$status' WHERE id='$id' ";
+    $email = $_POST['edit_email'];
+    $idno = $_POST['edit_idno'];
+    $status = $_POST['edit_status'];
+    $query = "UPDATE donor SET lastname='$lastname', firstname='$firstname', middlename='$middlename', password='$password',  birthdate='$birthdate',  age='$age', sex='$sex',  bloodGroup='$bloodGroup', 
+      identifyno='$identifyno',  street='$street', barangay='$barangay', tm='$tm', city='$city', code='$code', mobileNumber='$mobileNumber', 
+      email='$email', idno='$idno', status='$status' WHERE id='$id' ";
     
 	$query_run = mysqli_query($connection, $query);
 
@@ -33,9 +45,9 @@ if(isset($_POST['updatebtn']))
 ?>
         <?php
         session_start();
-        $connection = mysqli_connect("localhost","root","","bloodline");
+        $connection = mysqli_connect("localhost","root","","bloodlinenew");
         //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
-        if(isset($_POST['editbtn']))
+        if(isset($_POST['eventbtn']))
         {
             $id = $_POST['edit_id'];
             $title = $_POST['edit_title'];
@@ -65,7 +77,7 @@ if(isset($_POST['updatebtn']))
         session_start();
         $connection = mysqli_connect("localhost","root","");
         //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
-        $db = mysqli_select_db($connection, 'bloodline');
+        $db = mysqli_select_db($connection, 'bloodlinenew');
 
         if(isset($_POST['eventBtn']))
         {
@@ -90,6 +102,5 @@ if(isset($_POST['updatebtn']))
                 header('Location: announcement.php'); 
             }
         }
-
         ?>
-       
+

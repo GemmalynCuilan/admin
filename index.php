@@ -19,7 +19,7 @@ include('includes/header.php');
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Register Here!</h1>
                 <?php
-                $connection = mysqli_connect("localhost","root","","bloodline");
+                $connection = mysqli_connect("localhost","root","","bloodlinenew");
                 if(isset($_POST['submit'])){
 
                   $username = $_POST['username'];
@@ -35,7 +35,7 @@ include('includes/header.php');
 
                         $insert = "INSERT INTO admin(username, password) VALUES('$username','$password')";
                         mysqli_query($connection, $insert);
-                        header('location:login.php');
+                        header('location:loginAdmin.php');
                   }
                 };
                 ?>
@@ -63,7 +63,7 @@ include('includes/header.php');
             
                     <button type="submit" name="submit" class="btn btn-primary btn-user btn-block"> Register </button>
                     <hr>
-                    <p>Already have an account? <a href="login.php">login now</a></p>
+                    <p>Already have an account? <a href="loginAdmin.php">login now</a></p>
                 </form>
 
 
