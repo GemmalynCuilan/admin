@@ -7,7 +7,7 @@ session_start();
         $donor_id = $_POST['donor_id'];
         $comment = $_POST['comment'];
 		
-			$query = "INSERT INTO task (`donor_id`,`status`,`comment`) VALUES ('$donor_id','ONGOING','$comment')";
+			$query = "INSERT INTO task(`donor_id`,`status`,`comment`) VALUES ('$donor_id','ONGOING','$comment')";
 			$query_run = mysqli_query($connection, $query);
 		
 	
@@ -39,7 +39,7 @@ session_start();
 		$comment_rel = $_POST['comment_rel'];
         
 		
-			$query = "INSERT INTO task (`sernum`,`bcomponent`,`patient_name`,`ex_date`,`expdate`,`comment_rel`) VALUES (`$sernum`,`$bcomponent`,`$patient_name`,`$ex_date`,`$expdate`,`$comment_rel`)";
+			$query = "INSERT INTO task(`sernum`,`bcomponent`,`patient_name`,`ex_date`,`expdate`,`comment_rel`) VALUES (`$sernum`,`$bcomponent`,`$patient_name`,`$ex_date`,`$expdate`,`$comment_rel`)";
 			$query_run = mysqli_query($connection, $query);
 		
 	

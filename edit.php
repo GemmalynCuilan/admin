@@ -34,24 +34,24 @@ include('security.php');
                         <form action="test.php" method="POST">
                             <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>">
                             <div class="form-group">
-                                <label> Lastname </label>
+                                <label> Last Name </label>
                                 <input type="text" name="edit_lastname" value="<?php echo $row['lastname'] ?>" class="form-control"
-                                    placeholder="Enter Lastname"required>
+                                    placeholder="Enter Last Name"required>
                             </div>
                             <div class="form-group">
-                                <label> Firstname </label>
+                                <label> First Name </label>
                                 <input type="text" name="edit_firstname" value="<?php echo $row['firstname'] ?>" class="form-control"
-                                    placeholder="Enter Firstname"required>
+                                    placeholder="Enter First Name"required>
                             </div>
                             <div class="form-group">
-                                <label> Middlename </label>
+                                <label> Middle Name </label>
                                 <input type="text" name="edit_middlename" value="<?php echo $row['middlename'] ?>" class="form-control"
-                                    placeholder="Enter Middlename"required>
+                                    placeholder="Enter Middle Name"required>
                             </div>
                             <div class="form-group">
-                                <label> Birthdate </label>
+                                <label> Birth Date </label>
                                 <input type="date" name="edit_birthdate" value="<?php echo $row['birthdate'] ?>" class="form-control"
-                                    placeholder="Enter Birthdate"required>
+                                    placeholder="Enter Birth Date"required>
                             </div>
                             <div class="form-group">
                                 <label> Age </label>
@@ -109,7 +109,7 @@ include('security.php');
                                     placeholder="Enter Town/Municipality"required>
                             </div>
                             <div class="form-group">
-                                <label>City</label>
+                                <label>Province/City</label>
                                 <input type="text" name="edit_city" value="<?php echo $row['city'] ?>" class="form-control"
                                     placeholder="Enter City"required>
                             </div>
@@ -141,6 +141,86 @@ include('security.php');
                                 <option value ="<?php echo $row['status'] ?>"><?php echo $row['status'] ?></option>
                                 <option value="active"> Active </option>
                                 <option value="inactive"> Inactive </option>
+                                </select>
+                             </div>
+                             <label>Medical History</label>
+                             <div class="form-group">
+                            <label for="" class="control-label">History of previous donation?</label>
+                            <select name="edit_previous" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['previous'] ?>"><?php echo $row['previous'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                        <div class="form-group">
+                                <label>No. of times:</label>
+                                <input type="text" name="edit_numtimes" value="<?php echo $row['numtimes'] ?>" class="form-control"
+                                    placeholder="Enter No. of times"required>
+                            </div>
+                            <div class="form-group">
+                                <label> Date of last donation </label>
+                                <input type="date" name="edit_lastdate" value="<?php echo $row['lastdate'] ?>" class="form-control"
+                                    placeholder="Enter date of last donation"required>
+                            </div>
+                        <div class="form-group">
+                                <label>Place of last donation</label>
+                                <input type="text" name="edit_place" value="<?php echo $row['place'] ?>" class="form-control"
+                                    placeholder="Enter place of last donation"required>
+                            </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Cancer, blood disease or bleeding, disorder(haemophilia)?</label>
+                            <select name="edit_group1" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group1'] ?>"><?php echo $row['group1'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Heart disease/surgery, rheumatic fever or chest pains?</label>
+                            <select name="edit_group2" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group2'] ?>"><?php echo $row['group2'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Lung disease, tuberculosis, or asthma?</label>
+                            <select name="edit_group3" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group3'] ?>"><?php echo $row['group3'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Kidney disease, thyroid disease, diabetes, epilepsy?</label>
+                            <select name="edit_group4" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group4'] ?>"><?php echo $row['group4'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                             <div class="form-group">
+                            <label for="" class="control-label">Chicken pox and/or cold sores?</label>
+                            <select name="edit_group5" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group5'] ?>"><?php echo $row['group5'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                             <div class="form-group">
+                            <label for="" class="control-label">Had a positive test for the HIV virus, Hepatitis virus, Syphilis or Malaria?</label>
+                            <select name="edit_group6" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group6'] ?>"><?php echo $row['group6'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
+                                </select>
+                             </div>
+                             <div class="form-group">
+                            <label for="" class="control-label">Have Malaria or Hepatitis in the past?</label>
+                            <select name="edit_group7" id="" class="custom-select select2" required>
+                                <option value ="<?php echo $row['group7'] ?>"><?php echo $row['group7'] ?></option>
+                                <option value="Yes"> Yes </option>
+                                <option value="No"> No </option>
                                 </select>
                              </div>
                              <td align="right">

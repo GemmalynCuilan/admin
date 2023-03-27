@@ -67,11 +67,11 @@ form {
                      <tr>
                         <th style="display:none;"> Indentification No.</th>
                         <th style="display:none;"> ID </th>
-                            <th> Lastname</th>
-                            <th> Firstname</th>
-                            <th style="display:none;"> Middlename</th>
+                            <th> Last Name</th>
+                            <th> First Name</th>
+                            <th style="display:none;"> Middle Name</th>
                             <th style="display:none;"> Password</th>
-                            <th style="display:none;"> Birthdate </th>
+                            <th style="display:none;"> Birth Date </th>
                             <th style="display:none;"> Age </th>
                             <th style="display:none;"> Sex</th>
                             <th> Blood Group</th>
@@ -79,7 +79,7 @@ form {
                             <th style="display:none;"> Street</th>
                             <th style="display:none;"> Barangay</th>
                             <th style="display:none;"> Town/Municipality</th>
-                            <th style="display:none;"> City</th>
+                            <th style="display:none;"> Province/City</th>
                             <th style="display:none;"> Zip Code</th>
                             <th> Mobile Number</th>
                             <th> Email Address</th>

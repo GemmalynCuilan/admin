@@ -8,7 +8,6 @@ if(isset($_POST['updatebtn']))
     $lastname = $_POST['edit_lastname'];
     $firstname = $_POST['edit_firstname'];
     $middlename = $_POST['edit_middlename'];
-	$password = $_POST['edit_password'];
 	$birthdate = $_POST['edit_birthdate'];
     $age = $_POST['edit_age'];
 	$sex = $_POST['edit_sex'];
@@ -23,9 +22,21 @@ if(isset($_POST['updatebtn']))
     $email = $_POST['edit_email'];
     $idno = $_POST['edit_idno'];
     $status = $_POST['edit_status'];
-    $query = "UPDATE donor SET lastname='$lastname', firstname='$firstname', middlename='$middlename', password='$password',  birthdate='$birthdate',  age='$age', sex='$sex',  bloodGroup='$bloodGroup', 
+
+    $previous = $_POST['edit_previous'];
+    $group1 = $_POST['edit_group1'];
+    $group2 = $_POST['edit_group2'];
+    $group3 = $_POST['edit_group3'];
+    $group4 = $_POST['edit_group4'];
+    $group5 = $_POST['edit_group5'];
+    $group6 = $_POST['edit_group6'];
+    $group7 = $_POST['edit_group7'];
+    $numtimes = $_POST['edit_numtimes'];
+    $lastdate = $_POST['edit_lastdate'];
+    $place = $_POST['edit_place'];
+    $query = "UPDATE donor SET lastname='$lastname', firstname='$firstname', middlename='$middlename',  birthdate='$birthdate',  age='$age', sex='$sex',  bloodGroup='$bloodGroup', 
       identifyno='$identifyno',  street='$street', barangay='$barangay', tm='$tm', city='$city', code='$code', mobileNumber='$mobileNumber', 
-      email='$email', idno='$idno', status='$status' WHERE id='$id' ";
+      email='$email', idno='$idno', status='$status', previous='$previous', group1='$group1', group2='$group2', group3='$group3', group4='$group4', group5='$group5', group6='$group6', group7='$group7' WHERE id='$id' ";
     
 	$query_run = mysqli_query($connection, $query);
 
