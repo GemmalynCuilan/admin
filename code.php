@@ -23,7 +23,7 @@
             else
             {
                 $_SESSION['status'] = "Username or Password is Invalid";
-                header('Location: login.php'); 
+                header('Location: loginAdmin.php'); 
             }
         }
 

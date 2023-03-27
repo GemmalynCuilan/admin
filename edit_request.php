@@ -115,7 +115,7 @@ include('includes/navbar.php');
                             </select>
                         </div>
                         <td align="right">
-                            <a href="request.php" class="btn btn-danger"> CANCEL </a>
+                            <a href="request.php" class="btn btn-secondary"> CANCEL </a>
                             <button type="submit" name="update" class="btn btn-primary"> UPDATE </button>
                         </td>
                         </form>

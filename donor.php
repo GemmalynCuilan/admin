@@ -17,6 +17,7 @@ include('includes/scripts.php');
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 form {
   display:inline-block;
@@ -30,20 +31,40 @@ form {
     </script>
     </head>
     <body>
+    <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-danger">Donor Registration List</h6>
+                <div id="filters">
+                <span>Fetch results by &nbsp;</span>
+        <select name="fetchval" id="fetchval">
+            <option value="" disabled="" selected="">Select Filter</option>
             
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            
+        </select>
+        <div class="text-right">
+        <form action = "excel1.php" method="POST">
+    <input type="submit" name="export_excel" class="btn btn-primary" value="Export to Excel"/>
+</form
+        
+    
         </div>
-       <?php
-                $query = "SELECT* from donor ORDER by id DESC";
+        </div>
+            <?php
+                $query = "SELECT * FROM donor";
                 $query_run = mysqli_query($connection, $query);
             ?>
                
-        <div style="height: 450px; overflow-y: auto;">
-        <table id="example" class="table table-hover table-light">
-                    <thead>
-                        <tr>
+<div style="height: 410px; overflow-y: auto;">
+            <div class="container">
+
+            <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                     <tr>
                         <th style="display:none;"> Indentification No.</th>
                         <th style="display:none;"> ID </th>
                             <th> Lastname</th>
@@ -62,17 +83,19 @@ form {
                             <th style="display:none;"> Zip Code</th>
                             <th> Mobile Number</th>
                             <th> Email Address</th>
-                            <th> Identification ID</th>
+                            <th style="display:none;"> Identification ID</th>
                             <th> Status</th>
                             <th> Action</th>
-                            
+
+                           
                         </tr>
                     </thead>
-                    
                     <?php
                         if(mysqli_num_rows($query_run) > 0)        
                         {
                             while($row = mysqli_fetch_assoc($query_run))
+                            
+                
                             {
                         ?>
                             <tr>
@@ -94,7 +117,7 @@ form {
                                 <td style="display:none;"><?php  echo $row['code']; ?></td>
                                 <td><?php  echo $row['mobileNumber']; ?></td>
                                 <td><?php  echo $row['email']; ?></td>
-                                <td><?php echo '<img src="Images/'.$row['reqimg'].'" width="100px;" height="100px;" alt="Image">'?></td>
+                                <th style="display:none;"><?php echo '<img src="Images/'.$row['reqimg'].'" width="100px;" height="100px;" alt="Image">'?></td>
                             
                                 <td class=" text-center">
                                         <?php if($row['status'] == "active"){
@@ -105,27 +128,25 @@ form {
                                         ?>	
 									</td>
                                     <div class="container my-3 bg-light">
-                                <td style="text-align">
+                                    <td style="text-align">
+                                    
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="View" type="button" data-target="#viewmodal<?php echo $row['id']?>"><i class="fa fa-eye"></i>&nbsp;</button>
                                     <form action = "edit.php" method="post">
                                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="edit_btn" class ="btn btn-warning btn-m"> <i class="fa fa-pencil-square-o"></i>&nbsp;</button>
-                                    </form>
-                                    <form action = "send.php" method="post">
-                                    <input type="hidden" name="send_id" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="send_btn" class ="btn btn-info btn-m"> <i class="fa fa-commenting"></i>&nbsp;</button>
-                                    </form>
-                                    <form action = "delete.php" method="post">
-                                    <input type="hidden" name="deleteId" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="deletebtn" class ="btn btn-danger btn-m"> <i class="fa fa-archive"></i>&nbsp;</button>
+                                    <button type = "submit" name="edit_btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class ="btn btn-success btn-sm"> <i class="fa fa-pencil-square-o"></i>&nbsp;</button>
                                     </form>
                                     <form action = "dl.php" method="post">
                                     <input type="hidden" name="dl_id" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="dl_btn" class ="btn btn-primary btn-m"> <i class="fa fa-download"></i>&nbsp;</button>
+                                    <button type = "submit" name="dl_btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" class ="btn btn-primary btn-sm"> <i class="fa fa-download"></i>&nbsp;</button>
                                     </form>
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Archive" type="button" data-target="#deletemodal<?php echo $row['id']?>"><i class="fa fa-archive"></i>&nbsp;</button>
+                                  
                                     </div>
                                
                             </tr>
                         <?php
+                        include 'delete_modal.php';
+                        include 'view.php';
                             } 
                         }
                         else {
@@ -134,42 +155,17 @@ form {
                         ?>
                         </tbody>
                         
-           <!-- DELETE POP UP FORM  -->
-            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Delete </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="delete.php" method="POST">
+ 
 
-                            <div class="modal-body">
-
-                                <input type="hidden" name="deleteId" id="deleteId">
-
-                                <h4> Do you want to delete this data?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                                <button type="submit" name="deletebtn" class="btn btn-success"> YES </button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-
-    </table>
+                    </table>
+ 
 </body>
 </html>
 <!-- /.container-fluid -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-  
+    <script src="https://ajx.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 <script>
     $(document).ready( function () {
     $('.table').DataTable();
@@ -183,23 +179,24 @@ form {
     });
 </script>
 
-<script>
-        $(document).ready(function () {
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#fetchval").on('change',function(){
+                var value = $(this).val();
+                //alert(value);
 
-            $('.deletebtn').on('click', function () {
-
-                $('#deletemodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#deleteId').val(data[0]);
-
+                $.ajax({
+                    url:"fetch1.php",
+                    type:"POST",
+                    data:'filter=' +value,
+                    beforeSend:function(){
+                        $(".container").html("<span>Working...</span>");
+                    },
+                    success:function(data){
+                        $(".container").html(data);
+                    }
+                });
             });
         });
     </script>

@@ -6,9 +6,9 @@ $db = mysqli_select_db($connection, 'bloodlinenew');
 
 if(isset($_POST['deletebtn']))
 {
-    $id = $_POST['deleteId'];
+    $id = $_POST['id'];
 
-    $query = "DELETE FROM donor WHERE id = '$id'";
+    $query = "DELETE FROM donor WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);
 
     if($query_run)
@@ -34,7 +34,7 @@ $db = mysqli_select_db($connection, 'bloodlinenew');
 
 if(isset($_POST['delete_btn']))
 {
-    $id = $_POST['deleteid'];
+    $id = $_POST['id'];
 
     $query = "DELETE FROM requests WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);
@@ -52,7 +52,6 @@ if(isset($_POST['delete_btn']))
         header('Location: request.php'); 
     }
 }
-
 ?>
 <?php
 @session_start();
@@ -93,35 +92,35 @@ if(isset($_POST['delete']))
 {
     $id = $_POST['id'];
 
-    $query = "DELETE FROM ongoing WHERE id='$id'";
+    $query = "DELETE FROM task WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);
 
     if($query_run)
     {
         $_SESSION['status'] = "Successfully deleted";
         $_SESSION['status_code'] = "success";
-        header('Location: ongoing.php'); 
+        header('Location: task.php'); 
     }
     else
     {
         $_SESSION['status'] = "Error";
         $_SESSION['status_code'] = "error";
-        header('Location: ongoing.php'); 
+        header('Location: task.php'); 
     }
 
 }
 
 ?>
-?>
+
 <?php
 @session_start();
 $connection = mysqli_connect("localhost","root","");
 //$connection = mysqli_connect("localhost", "id20168730_admin", "\I(FZ8NgE)awoyvQ", "id20168730_bloodline");
 $db = mysqli_select_db($connection, 'bloodlinenew');
 
-if(isset($_POST['btndelete']))
+if(isset($_POST['del']))
 {
-    $id = $_POST['iddelete'];
+    $id = $_POST['id'];
 
     $query = "DELETE FROM released WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);

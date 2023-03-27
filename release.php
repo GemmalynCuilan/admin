@@ -28,6 +28,7 @@ form {
         $('#example').DataTable();
     });
     </script>
+    <!-- DataTales Example 
 <div class="modal fade" id="form_modal" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -49,14 +50,8 @@ form {
                 <input type="text" name="location" class="form-control" placeholder="Enter location"required>
             </div>
 
-            <div class="form-group">
-                            <label for="" class="control-label">Select task</label>
-                            <select name="task" id="" class="custom-select select2" required>
-                                <option value = "ongoing"> ongoing </option>
-                                <option value = "released"> released </option>
-                            </select>
-                            </div>
-                            <div class="form-group">
+            
+     <div class="form-group">
                 <label> Date </label>
                 <input type="date" name="date" class="form-control" placeholder="Enter Date"required>
             </div>
@@ -66,7 +61,7 @@ form {
           </div>
         </div>
         <div class="modal-footer">
-        <button class="btn btn-danger" type="button" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+        <button class="btn btn-secondary" type="button" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
          <button name="insert" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
         </div>
       </form>
@@ -75,19 +70,16 @@ form {
   </div>
 </div>
 
-
+-->
 <div class="container-fluid">
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Issued Out 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_modal"><span class="glyphicon glyphicon-plus"></span> Add user</button>
-		<br /><br />
-    </h6>
+    <h2 class="m-0 font-weight-bold text-danger">Released Out</h2>
   </div>
   <?php
-                $query = "SELECT* from released ORDER by id DESC";
+                $query = "SELECT task.id as id, task.comment as comment, task.sernum as sernum, task.bcomponent as bcomponent, task.patient_name as patient_name, task.ex_date as ex_date,task.expdate as expdate, task.comment_rel as comment_rel, donor.lastname as lname, donor.firstname as fname, donor.bloodGroup as bgroup,task.created_at as created_at, task.comment as comment, task.status as status from task JOIN donor ON donor.id = task.donor_id WHERE task.status = 'ONGOING' ORDER by id DESC;";
                 $query_run = mysqli_query($connection, $query);
             ?>
   <div class="card-body">
@@ -98,16 +90,13 @@ form {
         <thead>
           <tr>
           <td style="display:none;"> ID </th>
-                            <th> Lastname </th>
-                            <th> Firstname </th>
-                            <th> Location </th>
-                            <th> Issued out on </th>
-                            <th> Comment </th>
-                            <th> Task </th>
-                            <th> Action </th>
-                          </tr>
-                        </thead>
-                        <tbody>
+          <th> Serial Number </th>
+          <th> Name of patient </th>
+          <th> Comment </th>
+          <th> Action </th>
+          </tr>
+          </thead>
+          <tbody>
                         <?php
                         if(mysqli_num_rows($query_run) > 0)        
                         {
@@ -116,32 +105,18 @@ form {
                         ?>
                         <tr>
                             <td style="display:none;"><?php  echo $row['id']; ?></td>
-                      
-                                <td><?php  echo $row['lastname']; ?></td>
-                                <td><?php  echo $row['firstname']; ?></td>
-                                  <td><?php  echo $row['location']; ?></td>
-                                  <td><?php  echo $row['date']; ?></td>
-                                  <td><?php  echo $row['comment']; ?></td>
-                                  <td class=" text-center">
-                                        <?php if($row['task'] == "ongoing"){
-                                            echo '<span class="badge badge-primary">ongoing</span>';
-                                        }else if ($row['task'] == "released"){
-                                            echo '<span class="badge badge-success">released</span>';
-                                        }
-                                        ?>	
-									                </td>
+                                <td><?php  echo $row['sernum']; ?></td>
+                                <td><?php  echo $row['patient_name']; ?></td>
+                                  <td><?php  echo $row['comment_rel']; ?></td>
                                     <div class="container my-3 bg-light">
                                    <td style="text-align">
-                                   <button class="btn btn-warning" data-toggle="modal" type="button" data-target="#update_modal<?php echo $row['id']?>"><i class="fa fa-pencil-square-o"></i>&nbsp;</button>
-                                    <form action = "delete.php" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                    <button type = "submit" name="delete" class ="btn btn-danger btn-m"> <i class="fa fa-archive"></i>&nbsp;</button>
-                                    </form>
+                                   <button class="btn btn-danger btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button" data-target="#delmodal<?php echo $row['id']?>"><i class="fa fa-archive"></i>&nbsp;</button> 
                                     </div>
                                
                             </tr>
                         <?php
-                       include 'update.php';
+                       include 'release_modal.php';
+                       include 'delete_modal.php';
                             } 
                         }
                         else {

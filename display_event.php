@@ -15,7 +15,7 @@ if($count>0)
 	$data_arr[$i]['venue'] = $data_row['event_venue'];
 	$data_arr[$i]['start'] = date("Y-m-d", strtotime($data_row['event_start_date']));
 	$data_arr[$i]['end'] = date("Y-m-d", strtotime($data_row['event_end_date']));
-	$data_arr[$i]['time'] = $data_row['event_time'];
+	$data_arr[$i]['time'] = date("h:i a", strtotime($data_row['event_time']));
 	$data_arr[$i]['color'] = '#'.substr(uniqid(),-6); // 'green'; pass colour name
 	$i++;
 	}

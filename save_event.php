@@ -5,7 +5,7 @@ $event_description = $_POST['event_description'];
 $event_venue = $_POST['event_venue'];
 $event_start_date = date("y-m-d", strtotime($_POST['event_start_date'])); 
 $event_end_date = date("y-m-d", strtotime($_POST['event_end_date']));
-$event_time = $_POST['event_time']; 
+$event_time = date("h:i a", strtotime($_POST['event_time']));
 			
 $insert_query = "insert into `event`(`event_name`,`event_description`,`event_venue`,`event_start_date`,`event_end_date`,`event_time`) values ('".$event_name."','".$event_description."','".$event_venue."','".$event_start_date."','".$event_end_date."','".$event_time."')";             
 if(mysqli_query($con, $insert_query))

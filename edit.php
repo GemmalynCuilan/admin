@@ -144,7 +144,7 @@ include('security.php');
                                 </select>
                              </div>
                              <td align="right">
-                            <a href="donor.php" class="btn btn-danger"> CANCEL </a>
+                            <a href="donor.php" class="btn btn-secondary"> CANCEL </a>
                             <button type="submit" name="updatebtn" class="btn btn-primary"> UPDATE </button>
                              </td>
                         </form>

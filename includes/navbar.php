@@ -13,6 +13,7 @@
 <hr class="sidebar-divider my-0">
         
 
+<div style="height: 600px; overflow-y: auto;">
 <!-- Nav Item - Dashboard -->
 
 <li class="nav-item active">
@@ -36,14 +37,16 @@
   Task
 </div>
 <li class="nav-item">
-  <a class="nav-link" href="ongoing.php">
-  <i class="fas fa-users"></i>
-    <span>Ongoing</span></a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="release.php">
-  <i class="fas fa-users"></i>
-    <span>Released</span></a>
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+    <i class="fas fa-fw fa-folder"></i>
+    <span>Manage Task</span>
+  </a>
+  <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <a class="collapse-item" href="task.php">Ongoing</a>
+      <a class="collapse-item" href="release.php">Released</a>
+     
+  </div>
 </li>
 
 <hr class="sidebar-divider">
@@ -62,6 +65,17 @@
     <span>Announcement</span></a>
 </li>
 
+
+
+<hr class="sidebar-divider">
+<!-- Nav Item - Activities Menu -->
+<li class="nav-item">
+  <a class="nav-link" href="send.php">
+  <i class="fa fa-envelope"></i>
+    <span>Send Mail</span></a>
+</li>
+
+
 <!-- Divider -->
 <hr class="sidebar-divider">
 
@@ -79,7 +93,7 @@
   <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Login Screens:</h6>
-      <a class="collapse-item" href="login.php">Login</a>
+      <a class="collapse-item" href="loginAdmin.php">Login</a>
       <a class="collapse-item" href="index.php">Register</a>
      
   </div>
@@ -130,8 +144,7 @@
                                 </form>
               </div>
             </li>
-
-
+ 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,14 +159,6 @@
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">

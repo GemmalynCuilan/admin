@@ -3,42 +3,35 @@
 		<div class="modal-content">
 			<form method="POST" action="updatecode.php">
 				<div class="modal-header">
-					<h3 class="modal-title">Update User</h3>
+					<h3 class="modal-title">Update Task Details</h3>
 				</div>
 				<div class="modal-body">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="form-group">
-							<label>Lastname</label>
+							<label>Full Name</label>
 							<input type="hidden" name="id" value="<?php echo $row['id']?>"/>
-							<input type="text" name="lastname" value="<?php echo $row['lastname']?>" class="form-control" required="required"/>
+							<input type="text" readonly name="lastname" value="<?php echo $row['lname'].' '.$row['fname']?>" class="form-control" required="required"/>
 						</div>
 						<div class="form-group">
-							<label>Firstname</label>
-							<input type="text" name="firstname" value="<?php echo $row['firstname']?>" class="form-control" required="required" />
+							<label>Date Created</label>
+							<input value="<?php echo $row['created_at']?>" class="form-control" readonly/>
 						</div>
 						<div class="form-group">
-							<label>Date</label>
-							<input type="date" name="date" value="<?php echo $row['date']?>" class="form-control" required="required"/>
+							<label>Status</label>
+							<input value="<?php echo $row['status']?>" class="form-control" readonly/>
 						</div>
 						<div class="form-group">
 						<label for="message-text" class="col-form-label">Comment:</label>
-						<textarea class="form-control" id="" value="<?php echo $row['comment']?>"name="comment"required></textarea>
+						<textarea class="form-control" id="" name="comment"required><?php echo $row['comment']?></textarea>
 					</div>
-						<div class="form-group">
-                            <label for="" class="control-label">Select task</label>
-                            <select name="task" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['task'] ?>"> <?php echo $row['task'] ?></option>
-								<option value = "ongoing"> ongoing </option>
-                                <option value = "released"> released </option>
-                            </select>
-                            </div>
+					
 					</div>
 				</div>
 				<div style="clear:both;"></div>
 				<div class="modal-footer">
-					<button class="btn btn-danger" type="button" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-					<button name="update" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Update</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+					<button name="update" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Update</button>
 				</div>
 				</div>
 			</form>

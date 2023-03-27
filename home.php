@@ -60,7 +60,7 @@ include('includes/navbar.php');
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
                 echo '<h5> Total Requests: '.$row.'</h5>';
-            ?>
+               ?>
               </div>
             </div>
             <div class="info">
@@ -115,7 +115,7 @@ include('includes/navbar.php');
               </div>
             </div>
             <div class="info">
-			          <a href = "#" class ="btn">View More</a>
+			          <a href = "release.php" class ="btn">View More</a>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<form method="POST" action="updatecode.php">
 				<div class="modal-header">
-					<h3 class="modal-title">Update User</h3>
+					<h3 class="modal-title">Update</h3>
 				</div>
 				<div class="modal-body">
 					<div class="col-md-2"></div>
@@ -29,20 +29,13 @@
 						<label for="message-text" class="col-form-label">Comment:</label>
 						<textarea class="form-control" id="" value="<?php echo $row['comment']?>"name="comment"required></textarea>
 					</div>
-						<div class="form-group">
-                            <label for="" class="control-label">Select task</label>
-                            <select name="task" id="" class="custom-select select2" required>
-                                <option value ="<?php echo $row['task'] ?>"> <?php echo $row['task'] ?></option>
-								<option value = "ongoing"> ongoing </option>
-                                <option value = "released"> released </option>
-                            </select>
-                            </div>
+				
 					</div>
 				</div>
 				<div style="clear:both;"></div>
 				<div class="modal-footer">
-					<button class="btn btn-danger" type="button" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-					<button name="updatebtn" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Update</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+					<button name="updatebtn" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Update</button>
 				</div>
 				</div>
 			</form>

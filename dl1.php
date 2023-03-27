@@ -11,7 +11,7 @@ require_once("dbconfig.php");
         {
             $id = $_POST['dlid'];
             
-        $res=mysqli_query($connection,"SELECT* from requests ORDER by id DESC");
+        $res=mysqli_query($connection,"SELECT* from requests where id='$id'");
 			while($row=mysqli_fetch_array($res)) 
 			{
 				echo '<tr> 

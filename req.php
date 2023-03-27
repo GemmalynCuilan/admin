@@ -1,6 +1,6 @@
 <?php
-if(!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['sex']) && !empty($_POST['street']) && !empty($_POST['barangay']) && !empty($_POST['tm']) && !empty($_POST['city'])&& !empty($_POST['unit'])
-&& !empty($_POST['relative'])&& !empty($_POST['renum'])&& !empty($_POST['bloodGroup']) && !empty($_POST['ccname']) && !empty($_POST['hospital'])&& !empty($_POST['reqimg'])){
+if(!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['sex']) && !empty($_POST['street']) && !empty($_POST['barangay']) && !empty($_POST['tm']) && !empty($_POST['city'])&& !empty($_POST['unit'])
+&& !empty($_POST['relative'])&& !empty($_POST['renum'])&& !empty($_POST['bloodGroup']) && !empty($_POST['ccname']) && !empty($_POST['hospital'])&& !empty($_POST['reqimg'])&& !empty($_POST['reason'])){
 
     $con = mysqli_connect("localhost", "root", "", "bloodlinenew");
     $lastname = $_POST['lastname'];
@@ -12,10 +12,12 @@ if(!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['s
     $city = $_POST['city'];
     $unit = $_POST['unit'];
     $relative = $_POST['relative'];
+    $email = $_POST['email'];
     $renum = $_POST['renum'];
     $bloodGroup= $_POST['bloodGroup'];
     $ccname = $_POST['ccname'];
     $hospital = $_POST['hospital'];
+    $reason = $_POST['reason'];
     
     $target_dir = "Images/";
     $reqimg = $_POST['reqimg'];
@@ -24,8 +26,8 @@ if(!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['s
     file_put_contents($target_dir, base64_decode($reqimg));
   
     if($con){
-        $sql = "insert into requests (lastname, firstname, sex, street, barangay, tm, city, unit,relative,renum,bloodGroup,ccname,hospital,reqimg) values 
-        ('".$lastname."', '".$firstname."', '".$sex."', '".$street."', '".$barangay."', '".$tm."', '".$city."', '".$unit."', '".$relative."', '".$renum."', '".$bloodGroup."', '".$ccname."', '".$hospital."', '".$imageStore."')";
+        $sql = "insert into requests (lastname, firstname, sex, street, barangay, tm, city, unit,relative,renum,bloodGroup,ccname,hospital,reqimg,email,reason) values 
+        ('".$lastname."', '".$firstname."', '".$sex."', '".$street."', '".$barangay."', '".$tm."', '".$city."', '".$unit."', '".$relative."', '".$renum."', '".$bloodGroup."', '".$ccname."', '".$hospital."', '".$imageStore."','".$email."','".$reason."')";
         if (mysqli_query($con, $sql)) {
             echo "success";
         }else echo "Registration failed";

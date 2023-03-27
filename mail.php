@@ -9,13 +9,9 @@ $mail = new PHPMailer(true);
 $alert = '';
 
 if(isset($_POST['submit'])){
-
 $email = $_POST['email'];
-
-
 $subject= $_POST['subject'];
 $message= $_POST['message'];
-
 
 try{
 	$mail->isSMTP();
@@ -26,13 +22,12 @@ try{
 	$mail->SMTPSecure = 'tls';
 $mail->Port = '587';
 
-
 $mail->setFrom('gemmalyncuilan@gmail.com');
 $mail->addAddress($email);
 
 $mail->isHTML(true);
-$mail->Subject = 'Message' . $email;
-$mail-> Body = "Name" .$email; 
+$mail->Subject = $subject;
+$mail-> Body = $message; 
 $mail->send();
 $alert= "<div class='alert-success'><span>Message</span></div>";
 }catch(Exception $e){
