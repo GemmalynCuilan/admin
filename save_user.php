@@ -27,19 +27,21 @@ session_start();
 ?>
 
 <?php
-session_start();
+
 	require_once 'dbconfig.php';
 	
 	if(ISSET($_POST['insert'])){
+		$donor_id = $_POST['donor_id'];
 		$sernum = $_POST['sernum'];
         $bcomponent = $_POST['bcomponent'];
-		$patient_name = $_POST['patient_name'];
-		$ex_date = $_POST['ex_date'];
+		$patientname = $_POST['patientname'];
+		$exdate = $_POST['exdate'];
 		$expdate = $_POST['expdate'];
-		$comment_rel = $_POST['comment_rel'];
+		$commentrel = $_POST['commentrel'];
         
 		
-			$query = "INSERT INTO task(`sernum`,`bcomponent`,`patient_name`,`ex_date`,`expdate`,`comment_rel`) VALUES (`$sernum`,`$bcomponent`,`$patient_name`,`$ex_date`,`$expdate`,`$comment_rel`)";
+			$query = "INSERT INTO task(donor_id, sernum, bcomponent, patientname,exdate, expdate, commentrel) values 
+			('".$donor_id."','".$sernum."', '".$bcomponent."', '".$patientname ."', '".$exdate."', '".$expdate."','".$commentrel."')";
 			$query_run = mysqli_query($connection, $query);
 		
 	

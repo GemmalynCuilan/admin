@@ -77,14 +77,15 @@ input.form-control:read-only {
     </h6>
   </div>
       <?php
-          $query = "SELECT task.id as id, task.comment as comment, donor.lastname as lname, donor.firstname as fname, donor.bloodGroup as bgroup,task.created_at as created_at, task.comment as comment, task.status as status from task JOIN donor ON donor.id = task.donor_id WHERE task.status = 'ONGOING' ORDER by id DESC;";
+          $query = "SELECT task.id as id, task.comment as comment, task.bloodGroup as bloodGroup, donor.lastname as lname, donor.firstname as fname, donor.bloodGroup as bgroup, task.created_at as created_at, task.comment as comment, task.status as status from task JOIN donor ON donor.id = task.donor_id WHERE task.status = 'ONGOING' ORDER by id DESC;";
           $query_run = mysqli_query($connection, $query);
             ?>
-  <div class="card-body">
+<div style="height: 410px; overflow-y: auto;">
+            <div class="container">
 
-    <div class="table-responsive">
+            <div class="table-responsive">
 
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <th> Task No.</th>
@@ -133,6 +134,7 @@ input.form-control:read-only {
         </tbody>
       </table>
 
+      </div>
     </div>
   </div>
 </div>

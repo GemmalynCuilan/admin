@@ -28,14 +28,16 @@ $db = mysqli_select_db($connection, 'bloodlinenew');
     if(isset($_POST['updatebtn']))
     {   
         $id = $_POST['id'];
-        
-        $lastname = $_POST['lastname'];
-        $firstname = $_POST['firstname'];
-        $date = $_POST['date'];
-        $location = $_POST['location'];
-        $comment = $_POST['comment'];
+    
+        $sernum = $_POST['sernum'];
+        $bcomponent = $_POST['bcomponent'];
+		$patientname = $_POST['patientname'];
+		$exdate = $_POST['exdate'];
+		$expdate = $_POST['expdate'];
+		$commentrel = $_POST['commentrel'];
+        $bloodGroup = $_POST['bloodGroup'];
 
-        $query = "UPDATE released SET lastname='$lastname', firstname='$firstname', date='$date', comment='$comment', location='$location' WHERE id='$id'  ";
+        $query = "UPDATE task SET sernum='$sernum', bcomponent='$bcomponent', patientname='$patientname', exdate='$exdate', expdate='$expdate', bloodGroup='$bloodGroup', commentrel= '$commentrel' WHERE id='$id'";
         $query_run = mysqli_query($connection, $query);
 
         if($query_run)

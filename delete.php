@@ -122,7 +122,7 @@ if(isset($_POST['del']))
 {
     $id = $_POST['id'];
 
-    $query = "DELETE FROM released WHERE id='$id'";
+    $query = "DELETE FROM task WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);
 
     if($query_run)

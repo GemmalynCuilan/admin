@@ -79,7 +79,7 @@ form {
     <h2 class="m-0 font-weight-bold text-danger">Released Out</h2>
   </div>
   <?php
-                $query = "SELECT task.id as id, task.comment as comment, task.sernum as sernum, task.bcomponent as bcomponent, task.patient_name as patient_name, task.ex_date as ex_date,task.expdate as expdate, task.comment_rel as comment_rel, donor.lastname as lname, donor.firstname as fname, donor.bloodGroup as bgroup,task.created_at as created_at, task.comment as comment, task.status as status from task JOIN donor ON donor.id = task.donor_id WHERE task.status = 'ONGOING' ORDER by id DESC;";
+                $query = "SELECT task.id as id, task.comment as comment, task.sernum as sernum, task.bcomponent as bcomponent, task.patientname as patientname, task.exdate as exdate, task.expdate as expdate, task.commentrel as commentrel, donor.lastname as lname, donor.firstname as fname, donor.bloodGroup as bgroup,task.created_at as created_at, task.comment as comment, task.status as status from task JOIN donor ON donor.id = task.donor_id WHERE task.status = 'ONGOING' ORDER by id DESC;";
                 $query_run = mysqli_query($connection, $query);
             ?>
   <div class="card-body">
@@ -95,8 +95,8 @@ form {
           </tr>
           </thead>
           <tbody>
-                        <?php
-                        if(mysqli_num_rows($query_run) > 0)        
+          <?php
+            if(mysqli_num_rows($query_run) > 0)        
                         {
                             while($row = mysqli_fetch_assoc($query_run))
                             {
@@ -104,8 +104,8 @@ form {
                         <tr>
                             <td style="display:none;"><?php  echo $row['id']; ?></td>
                                 <td><?php  echo $row['sernum']; ?></td>
-                                <td><?php  echo $row['patient_name']; ?></td>
-                                  <td><?php  echo $row['comment_rel']; ?></td>
+                                <td><?php  echo $row['patientname']; ?></td>
+                                  <td><?php  echo $row['commentrel']; ?></td>
                                     <div class="container my-3 bg-light">
                                    <td style="text-align">
                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button" data-target="#delmodal<?php echo $row['id']?>"><i class="fa fa-archive"></i>&nbsp;</button> 

@@ -107,7 +107,7 @@ include('includes/navbar.php');
               <div class="h5 mb-0 font-weight-bold text-gray-800">
               <?php
                 require 'dbconfig.php';
-                $query = "SELECT id FROM released ORDER BY id";  
+                $query = "SELECT id FROM task ORDER BY id";  
                 $query_run = mysqli_query($connection, $query);
                 $row = mysqli_num_rows($query_run);
                 echo '<h5> Total released: '.$row.'</h5>';
